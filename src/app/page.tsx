@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { supabaseAnon } from "@/lib/supabase";
+import { getSupabaseAnon } from "@/lib/supabase";
 
 interface FavoriteBook {
   id: string;
@@ -19,7 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchBooks() {
-      const { data, error } = await supabaseAnon
+      const { data, error } = await getSupabaseAnon()
         .from("favorites")
         .select("id, title, author, cover_url, ol_key")
         .order("created_at", { ascending: false });

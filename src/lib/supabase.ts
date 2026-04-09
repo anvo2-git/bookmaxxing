@@ -1,14 +1,24 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+function getUrl() {
+  return process.env.NEXT_PUBLIC_SUPABASE_URL!;
+}
+function getAnonKey() {
+  return process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+}
 
-// Anon client for public reads (no auth needed)
-export const supabaseAnon = createClient(supabaseUrl, supabaseAnonKey);
+// Lazy-initialized anon client for public reads (avoids build-time crash)
+let _supabaseAnon: SupabaseClient | null = null;
+export function getSupabaseAnon() {
+  if (!_supabaseAnon) {
+    _supabaseAnon = createClient(getUrl(), getAnonKey());
+  }
+  return _supabaseAnon;
+}
 
 // Authenticated client for user-specific writes
 export function createClerkSupabaseClient(getToken: () => Promise<string | null>) {
-  return createClient(supabaseUrl, supabaseAnonKey, {
+  return createClient(getUrl(), getAnonKey(), {
     global: {
       fetch: async (url, options = {}) => {
         const clerkToken = await getToken();
