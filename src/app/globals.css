@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg-deep: #1A0A2E;
+  --color-bg-primary: #2D1B4E;
+  --color-bg-card: #3D2560;
+  --color-bg-card-hover: #4A2D73;
+  --color-text-primary: #FFF0F5;
+  --color-text-secondary: #D8A9E8;
+  --color-text-muted: #8B6FA3;
+  --color-text-heading: #FFD700;
+  --color-accent-pink: #FF1493;
+  --color-accent-hot: #FF69B4;
+  --color-accent-magenta: #FF00FF;
+  --color-accent-gold: #FFD700;
+  --color-accent-lilac: #DDA0DD;
+  --font-circus: var(--font-bungee-shade);
+  --font-display: var(--font-fredoka);
+  --font-body: var(--font-space-grotesk);
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes sparkle-twinkle {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes gentle-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  background: linear-gradient(135deg, #1A0A2E, #2D1B4E, #4A1942, #2D1B4E, #1A0A2E);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  color: #FFF0F5;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+.sparkle-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.sparkle-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(2px 2px at 20% 30%, #FFD700 50%, transparent 100%),
+    radial-gradient(2px 2px at 40% 70%, #FF69B4 50%, transparent 100%),
+    radial-gradient(2px 2px at 60% 20%, #FF00FF 50%, transparent 100%),
+    radial-gradient(2px 2px at 80% 60%, #FFD700 50%, transparent 100%),
+    radial-gradient(2px 2px at 10% 80%, #FF69B4 50%, transparent 100%),
+    radial-gradient(2px 2px at 70% 90%, #FF00FF 50%, transparent 100%),
+    radial-gradient(2px 2px at 30% 50%, #FFD700 50%, transparent 100%),
+    radial-gradient(2px 2px at 90% 40%, #FF69B4 50%, transparent 100%);
+  animation: sparkle-twinkle 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.book-card {
+  background: linear-gradient(145deg, #3D2560, #2D1B4E);
+  border: 1px solid rgba(255, 105, 180, 0.15);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.book-card:hover {
+  transform: translateY(-8px) rotate(-1deg) scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.3), 0 0 40px rgba(255, 20, 147, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 105, 180, 0.5);
+}
+
+.rainbow-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #FF1493, #FF69B4, #FFD700, #FF00FF, #DDA0DD, #FF1493);
+}
+
+.empty-state-emoji {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.page-title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.page-title-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 150%;
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
