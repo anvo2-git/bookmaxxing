@@ -40,7 +40,7 @@ export default function Home() {
         </h1>
       </div>
       <p className="font-body text-[#D8A9E8] mb-8">
-        every book your classmates gagged over, all in one place
+        Wake up babe vibecoding's over it's time to pick up a goddamn book.
       </p>
 
       {loading ? (
